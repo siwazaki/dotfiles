@@ -26,6 +26,7 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "Aloxaf/fzf-tab", from:github
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug "knu/zsh-manydots-magic", use:manydots-magic, defer:2
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -54,13 +55,12 @@ bindkey '^x^b' anyframe-widget-checkout-git-branch
 # GHQでクローンしたGitリポジトリを表示
 bindkey '^x^g' anyframe-widget-cd-ghq-repository
 
-
 export ENHANCD_FILTER=fzf
 export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HOME=1
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=100000
-SAVEHIST=1000000
+HISTSIZE=10000
+SAVEHIST=10000
 
 export PATH="$HOME/.pyenv/shims:$PATH"
 if type "pyenv" > /dev/null 2>&1; then
@@ -78,7 +78,13 @@ if type "nodenv" > /dev/null 2>&1; then
 fi
 
 export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.bin/flutter/bin:$PATH"
+
+#dart
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+#flutter
+export PATH="$PATH":"$HOME/fvm/default/bin"
+#java
+export JAVA_HOME=$(/usr/libexec/java_home -v "1.8")
 
 if type "lsd" > /dev/null 2>&1; then
     alias ls='lsd'
@@ -91,7 +97,6 @@ fi
 if [ $HOST = "nef-hidebu" ]; then
     disable-fzf-tab
 fi
-
 
 alias ll='ls -l'
 alias l='ls -l'
@@ -106,3 +111,5 @@ alias tat='tmux attach -t'
 alias tls='tmux ls'
 alias vpnup='networksetup -connectpppoeservice Nefrock && ~/.bin/add-vpn-route'
 alias vpndown='networksetup -disconnectpppoeservice Nefrock'
+alias sail='bash vendor/bin/sail'
+
