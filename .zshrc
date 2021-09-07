@@ -79,12 +79,6 @@ fi
 
 export PATH="$HOME/.bin:$PATH"
 
-#dart
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-#flutter
-export PATH="$PATH":"$HOME/fvm/default/bin"
-#java
-export JAVA_HOME=$(/usr/libexec/java_home -v "1.8")
 
 if type "lsd" > /dev/null 2>&1; then
     alias ls='lsd'
@@ -92,6 +86,13 @@ fi
 
 if $IS_REMOTE; then
     zstyle :prompt:pure:host color red
+else
+    #dart
+    export PATH="$PATH":"$HOME/.pub-cache/bin"
+    #flutter
+    export PATH="$PATH":"$HOME/fvm/default/bin"
+    #java
+    export JAVA_HOME=$(/usr/libexec/java_home -v "1.8")
 fi
 
 if [ $HOST = "nef-hidebu" ]; then
