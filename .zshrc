@@ -113,4 +113,5 @@ alias tls='tmux ls'
 alias vpnup='networksetup -connectpppoeservice Nefrock && ~/.bin/add-vpn-route'
 alias vpndown='networksetup -disconnectpppoeservice Nefrock'
 alias sail='bash vendor/bin/sail'
+alias dc='docker-compose'
 
