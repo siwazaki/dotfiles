@@ -58,11 +58,22 @@ bindkey '^x^g' anyframe-widget-cd-ghq-repository
 export ENHANCD_FILTER=fzf
 export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HOME=1
+
+#hist file
+
+setopt HIST_IGNORE_DUPS           # 前と重複する行は記録しない
+setopt HIST_IGNORE_ALL_DUPS       # 履歴中の重複行をファイル記録前に無くす
+setopt HIST_IGNORE_SPACE          # 行頭がスペースのコマンドは記録しない
+setopt HIST_FIND_NO_DUPS          # 履歴検索中、(連続してなくとも)重複を飛ばす
+setopt HIST_REDUCE_BLANKS         # 余分な空白は詰めて記録
+setopt HIST_NO_STORE              # histroyコマンドは記録しない
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
 export PATH="$HOME/.pyenv/shims:$PATH"
+export PATH="/usr/local/cuda/bin:$PATH"
+
 if type "pyenv" > /dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi    
@@ -114,4 +125,5 @@ alias vpnup='networksetup -connectpppoeservice Nefrock && ~/.bin/add-vpn-route'
 alias vpndown='networksetup -disconnectpppoeservice Nefrock'
 alias sail='bash vendor/bin/sail'
 alias dc='docker-compose'
+alias dw='docker-compose exec workspace /bin/zsh'
 
