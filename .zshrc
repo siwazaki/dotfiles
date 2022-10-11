@@ -36,13 +36,13 @@ fi
 
 zplug load --verbose
 
-# Ctrl+x -> b
+# Ctrl+b
 # fzf でディレクトリの移動履歴を表示
 bindkey '^g' anyframe-widget-cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
-# Ctrl+x -> r
+# Ctrl+r
 # fzf でコマンドの実行履歴を表示
 bindkey '^r' anyframe-widget-execute-history
 
@@ -50,7 +50,7 @@ bindkey '^r' anyframe-widget-execute-history
 # fzf でGitブランチを表示して切替え
 bindkey '^x^b' anyframe-widget-checkout-git-branch
 
-# Ctrl+x -> g
+# Ctrl+x -> Ctrl+g
 # GHQでクローンしたGitリポジトリを表示
 bindkey '^x^g' anyframe-widget-cd-ghq-repository
 
