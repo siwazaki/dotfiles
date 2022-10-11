@@ -15,7 +15,6 @@ fi
 
 source ~/.zplug/init.zsh
 zstyle ':completion:*:default' menu select=1
-
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-syntax-highlighting'
