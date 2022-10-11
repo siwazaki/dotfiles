@@ -1,4 +1,5 @@
-autoload -U promptinit; promptinit
+autoload -U promptinit
+promptinit
 setopt inc_append_history
 setopt share_history
 setopt auto_cd
@@ -7,16 +8,14 @@ setopt auto_list
 setopt auto_param_keys
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-  IS_REMOTE=true
+    IS_REMOTE=true
 else
-  IS_REMOTE=false
-fi    
-
+    IS_REMOTE=false
+fi
 
 source ~/.zplug/init.zsh
 zstyle ':completion:*:default' menu select=1
 
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-syntax-highlighting'
@@ -26,12 +25,12 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "Aloxaf/fzf-tab", from:github
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug "knu/zsh-manydots-magic", use:manydots-magic, defer:2
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
-        echo; zplug install
+        echo
+        zplug install
     fi
 fi
 
@@ -61,12 +60,12 @@ export ENHANCD_DISABLE_HOME=1
 
 #hist file
 
-setopt HIST_IGNORE_DUPS           # 前と重複する行は記録しない
-setopt HIST_IGNORE_ALL_DUPS       # 履歴中の重複行をファイル記録前に無くす
-setopt HIST_IGNORE_SPACE          # 行頭がスペースのコマンドは記録しない
-setopt HIST_FIND_NO_DUPS          # 履歴検索中、(連続してなくとも)重複を飛ばす
-setopt HIST_REDUCE_BLANKS         # 余分な空白は詰めて記録
-setopt HIST_NO_STORE              # histroyコマンドは記録しない
+setopt HIST_IGNORE_DUPS     # 前と重複する行は記録しない
+setopt HIST_IGNORE_ALL_DUPS # 履歴中の重複行をファイル記録前に無くす
+setopt HIST_IGNORE_SPACE    # 行頭がスペースのコマンドは記録しない
+setopt HIST_FIND_NO_DUPS    # 履歴検索中、(連続してなくとも)重複を飛ばす
+setopt HIST_REDUCE_BLANKS   # 余分な空白は詰めて記録
+setopt HIST_NO_STORE        # histroyコマンドは記録しない
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -74,31 +73,39 @@ SAVEHIST=10000
 export PATH="$HOME/.pyenv/shims:$PATH"
 export PATH="/usr/local/cuda/bin:$PATH"
 
-if type "pyenv" > /dev/null 2>&1; then
+if type "pyenv" >/dev/null 2>&1; then
     eval "$(pyenv init -)"
-fi    
+fi
 
 export PATH="$HOME/.rbenv/shims:$PATH"
-if type "rbenv" > /dev/null 2>&1; then
+if type "rbenv" >/dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
 
 export PATH="$HOME/.nodenv/shims:$PATH"
-if type "nodenv" > /dev/null 2>&1; then
+if type "nodenv" >/dev/null 2>&1; then
     eval "$(nodenv init -)"
 fi
 
 export PATH="$HOME/.bin:$PATH"
+
 #dart
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+
 #flutter
 export PATH="$PATH":"$HOME/fvm/default/bin"
+
 #java
 if [ -e /usr/libexec/java_home ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v "1.8")
+    export JAVA_HOME=$(/usr/libexec/java_home -v "11")
 fi
 
-if type "lsd" > /dev/null 2>&1; then
+#android studio
+export PATH="$PATH":"$HOME/Library/Android/sdk/platform-tools"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export ANDROID_NDK_HOME="$HOME/Library/Android/sdk/ndk/21.4.7075529"
+
+if type "lsd" >/dev/null 2>&1; then
     alias ls='lsd'
 fi
 
@@ -126,4 +133,6 @@ alias vpndown='networksetup -disconnectpppoeservice Nefrock'
 alias sail='bash vendor/bin/sail'
 alias dc='docker-compose'
 alias dw='docker-compose exec workspace /bin/zsh'
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
