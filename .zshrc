@@ -37,7 +37,7 @@ fi
 
 zplug load --verbose
 
-# Ctrl+b
+# Ctrl+g
 # fzf でディレクトリの移動履歴を表示
 bindkey '^g' anyframe-widget-cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
