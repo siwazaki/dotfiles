@@ -24,6 +24,8 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "Aloxaf/fzf-tab", from:github
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug "ptavares/zsh-direnv"
+
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -68,6 +70,7 @@ setopt HIST_NO_STORE        # histroyコマンドは記録しない
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
+export EDITOR=emacs
 
 export PATH="$HOME/.pyenv/shims:$PATH"
 export PATH="/usr/local/cuda/bin:$PATH"
@@ -81,10 +84,10 @@ if type "rbenv" >/dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
 
-export PATH="$HOME/.nodenv/shims:$PATH"
-if type "nodenv" >/dev/null 2>&1; then
-    eval "$(nodenv init -)"
-fi
+#export PATH="$HOME/.nodenv/shims:$PATH"
+#if type "nodenv" >/dev/null 2>&1; then
+#    eval "$(nodenv init -)"
+#fi
 
 export PATH="$HOME/.bin:$PATH"
 
@@ -130,8 +133,26 @@ alias tls='tmux ls'
 alias vpnup='networksetup -connectpppoeservice Nefrock && ~/.bin/add-vpn-route'
 alias vpndown='networksetup -disconnectpppoeservice Nefrock'
 alias sail='bash vendor/bin/sail'
-alias dc='docker-compose'
-alias dw='docker-compose exec workspace /bin/zsh'
+alias dc='docker compose'
+alias dw='docker compose exec workspace /bin/zsh'
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+alias flutter="fvm flutter"
+
+
+#dir env
+eval "$(direnv hook zsh)"
+
+#RUST
+export RUST_BACKTRACE=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#source "$HOME/.rye/env"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/siwazaki/.dart-cli-completion/zsh-config.zsh ]] && . /Users/siwazaki/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
