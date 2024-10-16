@@ -4,6 +4,7 @@ config.color_scheme = "Dracula (Official)"
 -- config.color_scheme = "Dracula (Gogh)"
 -- config.color_scheme = "Dracula++"
 config.tab_bar_at_bottom = true
+config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"
 config.audible_bell = "Disabled"
